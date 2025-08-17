@@ -2,7 +2,7 @@
 set -e
 
 echo "🚀 Updating system..."
-sudo apt update && sudo apt upgrade -y
+sudo apt update && sudo apt full-upgrade -y
 
 echo "📦 Installing prerequisites..."
 sudo apt install -y curl gnupg2 lsb-release software-properties-common build-essential
@@ -20,8 +20,8 @@ sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
 echo "🔄 Updating package index..."
 sudo apt update
 
-echo "🐢 Installing ROS 2 Humble (base install)..."
-sudo apt install -y ros-humble-ros-base
+echo "🐢 Installing ROS 2 Humble (base + demos)..."
+sudo apt install -y ros-humble-ros-base ros-humble-demo-nodes-cpp ros-humble-demo-nodes-py
 
 echo "⚙️ Setting up environment..."
 if ! grep -q "source /opt/ros/humble/setup.bash" ~/.bashrc; then
@@ -30,4 +30,6 @@ fi
 source ~/.bashrc
 
 echo "✅ ROS 2 Humble installation complete!"
-echo "Try running: ros2 run demo_nodes_cpp talker"
+echo "👉 Open a new terminal and try:"
+echo "   ros2 run demo_nodes_cpp talker"
+echo "   ros2 run demo_nodes_cpp listener"
